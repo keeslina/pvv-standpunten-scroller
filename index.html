@@ -16,13 +16,7 @@
 
     <style>
 		/* A simplified style block. All styling is now applied directly to the slide. */
-		.swiper-slide-active {
-			transform: scale(1.05);
-			background-color: #60a5fa !important; /* Tailwind's blue-400 to match the title */
-			color: #ffffff !important;
-			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-			opacity: 1 !important;
-		}
+
 		/* Ensure slides that are not active are slightly faded for focus */
 		.swiper-slide:not(.swiper-slide-active) {
 			opacity: 0.6;
@@ -38,15 +32,15 @@
 </head>
 <body class="bg-gray-900 font-sans flex  justify-center min-h-screen p-4">
 
-<div class="bg-gray-800 text-gray-200 rounded-2xl shadow-xl p-4 sm:p-6 w-full max-w-6xl flex flex-col">
-    <h1 class="text-2xl md:text-3xl font-bold text-center text-blue-400 mb-4">PVV Standpunten: Belofte vs. Realiteit</h1>
+<div class="bg-gray-800 text-gray-200 rounded-2xl shadow-xl p-4 sm:p-6 w-full max-w-6xl lg:h-[92vh] flex flex-col">
+    <h1 class="text-2xl md:text-3xl font-bold text-center text-blue-400 mb-4">300 verbroken PVV Verkiezingsbeloftes</h1>
     <p class="text-center mb-6 text-sm">Bron: <a class="text-blue-400 hover:underline font-bold" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSTMkodFf4rovfruXnneVbynlPBYlfXq-RxJ_O1g_EL0xlcSyB1WHjuMet3IrGZCiPX9Qrq20eM9ACT/pubhtml?gid=0&single=true" target="_blank">Ton Aarts</a></p>
     <!-- Content wrapper: flex-col on mobile, flex-row on desktop -->
     <div class="flex flex-col md:flex-row w-full flex-grow gap-4 overflow-hidden">
 
         <!-- Swiper Column -->
-        <div class="bg-white border border-gray-700 rounded-xl p-3 flex flex-col md:w-1/2 h-72 md:h-full">
-            <h2 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-3 flex-shrink-0">Scroll of klik op een standpunt</h2>
+        <div class="flex flex-col md:w-1/2 h-72 md:h-full my-4">
+            <h2 class="text-lg font-semibold text-gray-900 text-white pb-2 mb-3 flex-shrink-0 text-center">Scroll of klik op een standpunt</h2>
             <div class="relative flex-grow min-h-0">
                 <div class="swiper swiper-container h-full">
                     <div class="swiper-wrapper">
@@ -54,8 +48,8 @@
                     </div>
                 </div>
                 <!-- Fade effect overlays -->
-                <div class="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-gray-800 to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-800 to-transparent z-10 pointer-events-none"></div>
             </div>
         </div>
 
@@ -107,7 +101,7 @@
             cleanData.forEach(row => {
                 const slide = document.createElement('div');
                 // FIX: Removed line-clamp from the main div and wrapped the text in a <p> with the class.
-                slide.className = 'swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
+                slide.className = '[&.swiper-slide-active]:bg-blue-400 swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 text-white bg-white/5 rounded-lg transition-all duration-300 font-medium cursor-pointer';
                 slide.innerHTML = `<p class="line-clamp-2">${row[standpuntIndex]}</p>`;
                 swiperWrapper.appendChild(slide);
             });
@@ -118,7 +112,7 @@
                 slidesPerView: 3,
                 breakpoints: {
                     1024: {
-                        slidesPerView: 5, // Made slightly more compact on large screens
+                        slidesPerView: 9, // Made slightly more compact on large screens
                     },
                 },
                 spaceBetween: 15,
