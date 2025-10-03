@@ -96,7 +96,7 @@
 
             cleanData.forEach(row => {
                 const slide = document.createElement('div');
-                slide.className = 'swiper-slide h-min-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
+                slide.className = 'swiper-slide min-h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
                 slide.textContent = row[standpuntIndex];
                 swiperWrapper.appendChild(slide);
             });
