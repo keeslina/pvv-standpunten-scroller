@@ -1,3 +1,4 @@
+/* <<<<<<<<<<<<<<  ✨ Windsurf Command 🌟 >>>>>>>>>>>>>>>> */
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -96,7 +97,7 @@
 
             cleanData.forEach(row => {
                 const slide = document.createElement('div');
-                slide.className = 'swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
+                slide.className = 'swiper-slide minh-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
                 slide.textContent = row[standpuntIndex];
                 swiperWrapper.appendChild(slide);
             });
@@ -111,6 +112,7 @@
                 },
                 spaceBetween: 15,
                 centeredSlides: true,
+                initialSlide: Math.floor(Math.random() * 300),
                 loop: true,
                 freeMode: {
                     enabled: true,
@@ -180,3 +182,5 @@
 </body>
 </html>
 
+
+/* <<<<<<<<<<  d4c1eb09-a08a-46c1-a4ef-77223cf11e8c  >>>>>>>>>>> */
