@@ -61,7 +61,7 @@
 
         <!-- Answer Column -->
         <div class="bg-white border border-gray-700 rounded-xl p-5 flex flex-col md:w-1/2 flex-grow">
-            <h2 id="antwoord-titel" class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4 flex-shrink-0 line-clamp-2">Standpunt wordt geladen...</h2>
+            <h2 id="antwoord-titel" class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4 flex-shrink-0">Standpunt wordt geladen...</h2>
             <div class="flex-grow overflow-y-auto pr-2">
                 <p class="text-xs text-gray-500 mb-2 uppercase font-semibold">Wat gebeurde er?</p>
                 <div id="antwoord-tekst" class="text-gray-800 leading-relaxed text-base md:text-lg">
@@ -106,9 +106,9 @@
 
             cleanData.forEach(row => {
                 const slide = document.createElement('div');
-                // Replaced h-24 with min-h-[6rem] and added line-clamp-2 for flexible height with a max of 2 lines.
-                slide.className = 'swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer line-clamp-2';
-                slide.textContent = row[standpuntIndex];
+                // FIX: Removed line-clamp from the main div and wrapped the text in a <p> with the class.
+                slide.className = 'swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
+                slide.innerHTML = `<p class="line-clamp-2">${row[standpuntIndex]}</p>`;
                 swiperWrapper.appendChild(slide);
             });
 
