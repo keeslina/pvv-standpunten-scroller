@@ -27,11 +27,18 @@
 		.swiper-slide:not(.swiper-slide-active) {
 			opacity: 0.6;
 		}
+		/* Custom class for line clamping */
+		.line-clamp-2 {
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+		}
     </style>
 </head>
 <body class="bg-gray-900 font-sans flex items-center justify-center min-h-screen p-4">
 
-<div class="bg-gray-800 text-gray-200 rounded-2xl shadow-xl p-4 sm:p-6 w-full max-w-6xl min-h-[92vh] lg:h-[92vh] flex flex-col mb-8">
+<div class="bg-gray-800 text-gray-200 rounded-2xl shadow-xl p-4 sm:p-6 w-full max-w-6xl h-[92vh] flex flex-col">
     <h1 class="text-2xl md:text-3xl font-bold text-center text-blue-400 mb-4">PVV Standpunten: Belofte vs. Realiteit</h1>
     <p class="text-center mb-6 text-sm">Bron: <a class="text-blue-400 hover:underline font-bold" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSTMkodFf4rovfruXnneVbynlPBYlfXq-RxJ_O1g_EL0xlcSyB1WHjuMet3IrGZCiPX9Qrq20eM9ACT/pubhtml?gid=0&single=true" target="_blank">Ton Aarts</a></p>
     <!-- Content wrapper: flex-col on mobile, flex-row on desktop -->
@@ -54,8 +61,9 @@
 
         <!-- Answer Column -->
         <div class="bg-white border border-gray-700 rounded-xl p-5 flex flex-col md:w-1/2 flex-grow">
-            <h2 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4 flex-shrink-0">Wat gebeurde er?</h2>
+            <h2 id="antwoord-titel" class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mb-4 flex-shrink-0 line-clamp-2">Standpunt wordt geladen...</h2>
             <div class="flex-grow overflow-y-auto pr-2">
+                <p class="text-xs text-gray-500 mb-2 uppercase font-semibold">Wat gebeurde er?</p>
                 <div id="antwoord-tekst" class="text-gray-800 leading-relaxed text-base md:text-lg">
                     <p>Laden van de data...</p>
                 </div>
@@ -76,6 +84,8 @@
         const swiperWrapper = document.querySelector('.swiper-wrapper');
         const antwoordTekst = document.getElementById('antwoord-tekst');
         const bronContainer = document.getElementById('bron-container');
+        const antwoordTitel = document.getElementById('antwoord-titel');
+
 
         try {
             const response = await fetch(sheetUrl);
@@ -96,7 +106,8 @@
 
             cleanData.forEach(row => {
                 const slide = document.createElement('div');
-                slide.className = 'swiper-slide min-h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer';
+                // Replaced h-24 with min-h-[6rem] and added line-clamp-2 for flexible height with a max of 2 lines.
+                slide.className = 'swiper-slide h-24 flex-shrink-0 flex items-center justify-center text-center p-4 bg-gray-200 text-gray-800 rounded-lg transition-all duration-300 font-medium cursor-pointer line-clamp-2';
                 slide.textContent = row[standpuntIndex];
                 swiperWrapper.appendChild(slide);
             });
@@ -111,7 +122,6 @@
                 },
                 spaceBetween: 15,
                 centeredSlides: true,
-                initialSlide: Math.floor(Math.random() * 300),
                 loop: true,
                 freeMode: {
                     enabled: true,
@@ -122,9 +132,11 @@
 
             const updateAntwoord = () => {
                 const activeIndex = swiper.realIndex;
+                const standpuntText = cleanData[activeIndex][standpuntIndex];
                 const antwoordHTML = cleanData[activeIndex][antwoordIndex] || 'Geen data beschikbaar voor dit standpunt.';
                 const bronText = cleanData[activeIndex][bronIndex];
 
+                antwoordTitel.textContent = standpuntText;
                 antwoordTekst.innerHTML = antwoordHTML;
 
                 bronContainer.innerHTML = ''; // Clear previous source
